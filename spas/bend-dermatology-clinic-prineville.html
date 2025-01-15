@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bend Dermatology Clinic - Prineville - Premier Medical Spa in [LOCATION]">
+    <title>Bend Dermatology Clinic - Prineville | Oregon Med Spas</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">Top Medical Spas in Oregon</a></h1>
+    </header>
+
+    <main class="spa-details">
+        <h1>Bend Dermatology Clinic - Prineville</h1>
+        <div class="spa-header">
+            <div class="contact-info">
+                <p class="address"><i class="fas fa-location-dot"></i> 555 NW 3rd St Apartment 3, Prineville, OR 97754</p>
+                <p class="contact">
+                    <i class="fas fa-phone"></i> <a href="tel:+1 541-382-5712">+1 541-382-5712</a>
+                </p>
+            </div>
+        </div>
+
+        <nav class="page-nav">
+            <a href="#overview">Overvieww</a>
+            <span class="separator">•</span>
+            <a href="#services">Services</a>
+            <span class="separator">•</span>
+            <a href="#location">Location</a>
+            <span class="separator">•</span>
+            <a href="#stats">Stats</a>
+            <span class="separator">•</span>
+            <a href="#reviews">Reviews</a>
+            <span class="separator">•</span>
+            <a href="#hours">Hours</a>
+        </nav>
+
+        <section id="overview" class="spa-description">
+            <h3>Brief Overvieww</h3>
+            <p>Located in Prineville, OR, Bend Dermatology Clinic - Prineville provides medical spa, dermatologist, skin care clinic. The facility maintains a 4.9-star rating based on feedback from 384 client reviews, demonstrating its track record in delivering medical spa treatments.</p>
+        </section>
+
+        <section id="services">
+            <h3>Services</h3>
+            <p>Medical spa, Dermatologist, Skin care clinic</p>
+        </section>
+
+        <section id="location" class="map-section">
+            <h3>Location</h3>
+            <div class="map-container">
+                <iframe
+                    width="100%"
+                    height="450"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDUVkkidbALYcaWBwzomcsfjSpldUAJxMs&q=555%20NW%203rd%20St%20Apartment%203%2C%20Prineville%2C%20OR%2097754">
+                </iframe>
+            </div>
+        </section>
+
+        <div id="stats" class="stats">
+            <div class="stat-card">
+                <h3>Rating</h3>
+                <p><i class="fas fa-star"></i> 4.9</p>
+            </div>
+            <div class="stat-card">
+                <h3>Reviews</h3>
+                <p><i class="fas fa-comments"></i> 384</p>
+            </div>
+            <div class="stat-card">
+                <h3>Status</h3>
+                <p><i class="fas fa-check-circle"></i> OPERATIONAL</p>
+            </div>
+        </div>
+
+        <section id="reviews">
+            
+        <div class="review-chart-container">
+            <div class="chart-section">
+                <canvas id="review-chart"></canvas>
+            </div>
+        </div>
+        <script>
+            const ctx = document.getElementById('review-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['5 Stars', '4 Stars', '3 Stars', '2 Stars', '1 Star'],
+                    datasets: [{
+                        data: [
+                            350,
+                            26,
+                            5,
+                            0,
+                            3
+                        ],
+                        backgroundColor: [
+                            '#22c55e',
+                            '#84cc16',
+                            '#eab308',
+                            '#f97316',
+                            '#ef4444'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    return data.labels.map((label, i) => ({
+                                        text: label + ' (' + data.datasets[0].data[i] + ' reviews)',
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        index: i
+                                    }));
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + ' reviews';
+                                }
+                            }
+                        }
+                    },
+                    elements: {
+                        arc: {
+                            borderWidth: 0
+                        }
+                    }
+                }
+            });
+        </script>
+    
+        </section>
+
+        <img class="spa-photo" src="https://lh5.googleusercontent.com/p/AF1QipMlpp_3FGMYrSV0W5bCNFUQ0uYJ0kJtaHhMS6xu=w800-h500-k-no" alt="Bend Dermatology Clinic - Prineville">
+
+        <section id="hours">
+            <h3>Hours of Operation</h3>
+            <table class="hours-table">
+                
+            <tr>
+                <td>Monday</td>
+                <td>8AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td>8AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td>8AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td>8AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td>8AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td>Closed</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>Closed</td>
+            </tr>
+            </table>
+        </section>
+
+        <div class="contact-actions">
+            <a href="tel:+1 541-382-5712" class="button">Call Now</a>
+            <a href="https://bendderm.com/" target="_blank" class="button">Visit Website</a>
+            <a href="https://www.google.com/maps/place/Bend+Dermatology+Clinic+-+Prineville/@44.3033496,-120.852723,14z/data=!4m8!1m2!2m1!1sBend+Dermatology+Clinic+-+Prineville!3m4!1s0x54b9333944da80cb:0xc7d6e7febbf4e8c2!8m2!3d44.3033496!4d-120.852723" target="_blank" class="button">Get Directions</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Oregon Med Spas Directory. All rights reserved.</p>
+    </footer>
+</body>
+</html> 

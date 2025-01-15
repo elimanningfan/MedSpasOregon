@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandon Med Spas - Best Medical Spas in Bandon, Oregon</title>
+    <meta name="description" content="Discover the best medical spas in Bandon, Oregon. Compare ratings, reviews, services, and locations of top med spas in Bandon.">
+    <meta name="keywords" content="med spa Bandon, medical spa Bandon, aesthetic clinic Bandon, beauty treatments Bandon, Oregon med spas">
+    
+    <!-- Open Graph tags for social sharing -->
+    <meta property="og:title" content="Bandon Med Spas - Best Medical Spas in Bandon, Oregon">
+    <meta property="og:description" content="Find and compare the best medical spas in Bandon, Oregon. Read reviews, check ratings, and discover top-rated med spa services near you.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://medspas.oregon/cities/bandon">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- City-specific styles -->
+    <style>
+        .city-header {
+            text-align: center;
+            padding: 2rem 0;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .city-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .map-overview {
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 1rem;
+        }
+        
+        #map {
+            height: 400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .med-spa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .med-spa-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .med-spa-card:hover {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-logo">Oregon Med Spas</a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="city-header">
+        <h1>Best Medical Spas in Bandon, Oregon</h1>
+        <div class="city-stats">
+            <div class="stat-item">
+                <i class="fas fa-building"></i>
+                <span>1 Med Spas</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <span>5.0 Average Rating</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-comment"></i>
+                <span>32 Total Reviews</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="map-overview">
+            <div id="map"></div>
+        </section>
+
+        <section class="med-spa-listings">
+            <div class="med-spa-grid">
+                <!-- Med spa cards will be populated here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Oregon Med Spas. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../data.js"></script>
+    <script>
+        // City-specific data
+        const CITY_NAME = "Bandon";
+        const citySpas = medSpas.filter(spa => {
+            const spaCity = spa.location.split(',')[0].trim();
+            return spaCity === CITY_NAME;
+        });
+
+        // Initialize map
+        let map;
+        let markers = [];
+        let infoWindow;
+
+        function initMap() {
+            // Create info window
+            infoWindow = new google.maps.InfoWindow({
+                maxWidth: 300
+            });
+
+            // Create bounds to fit all markers
+            const bounds = new google.maps.LatLngBounds();
+
+            // Initialize map centered on first spa
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                mapTypeControl: true,
+                streetViewControl: false,
+                fullscreenControl: true,
+                styles: [
+                    {
+                        featureType: "poi",
+                        elementType: "labels",
+                        stylers: [{ visibility: "off" }]
+                    }
+                ]
+            });
+
+            // Add markers for each spa
+            citySpas.forEach(spa => {
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ address: spa.address }, (results, status) => {
+                    if (status === 'OK' && results[0].geometry) {
+                        const position = results[0].geometry.location;
+                        
+                        // Create marker
+                        const marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: spa.name,
+                            animation: google.maps.Animation.DROP
+                        });
+
+                        // Store marker
+                        markers.push(marker);
+
+                        // Extend bounds
+                        bounds.extend(position);
+
+                        // Create info window content
+                        const content = `
+                            <div class="map-info-window">
+                                <h3>${spa.name}</h3>
+                                <p><i class="fas fa-star"></i> ${Number(spa.rating).toFixed(1)} (${spa.reviews} reviews)</p>
+                                <p><i class="fas fa-location-dot"></i> ${spa.address}</p>
+                                <a href="${spa.website}" target="_blank" class="button">Visit Website</a>
+                            </div>
+                        `;
+
+                        // Add click listener
+                        marker.addListener('click', () => {
+                            infoWindow.setContent(content);
+                            infoWindow.open(map, marker);
+                        });
+
+                        // Fit map to bounds after all markers are added
+                        if (markers.length === citySpas.length) {
+                            map.fitBounds(bounds);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Populate spa listings
+        function populateSpas() {
+            const grid = document.querySelector('.med-spa-grid');
+            
+            citySpas.forEach(spa => {
+                const card = document.createElement('article');
+                card.className = 'med-spa-card';
+                card.innerHTML = `
+                    <h2><a href="${spa.website}" target="_blank">${spa.name}</a></h2>
+                    <div class="rating">
+                        <i class="fas fa-star"></i> <span>${spa.rating}</span>
+                        <span class="review-count">(${spa.reviews} reviews)</span>
+                    </div>
+                    <p class="location"><i class="fas fa-location-dot"></i> <span>${spa.address}</span></p>
+                    <p class="services">Services: <span>${spa.services}</span></p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            populateSpas();
+        });
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUVkkidbALYcaWBwzomcsfjSpldUAJxMs&callback=initMap">
+    </script>
+</body>
+</html> 

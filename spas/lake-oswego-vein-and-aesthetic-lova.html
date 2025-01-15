@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lake Oswego Vein and Aesthetic _ LOVA - Premier Medical Spa in [LOCATION]">
+    <title>Lake Oswego Vein and Aesthetic _ LOVA | Oregon Med Spas</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">Top Medical Spas in Oregon</a></h1>
+    </header>
+
+    <main class="spa-details">
+        <h1>Lake Oswego Vein and Aesthetic _ LOVA</h1>
+        <div class="spa-header">
+            <div class="contact-info">
+                <p class="address"><i class="fas fa-location-dot"></i> 16877 SW 65th Ave, Lake Oswego, OR 97035</p>
+                <p class="contact">
+                    <i class="fas fa-phone"></i> <a href="tel:+1 503-387-5546">+1 503-387-5546</a>
+                </p>
+            </div>
+        </div>
+
+        <nav class="page-nav">
+            <a href="#overview">Overvieww</a>
+            <span class="separator">•</span>
+            <a href="#services">Services</a>
+            <span class="separator">•</span>
+            <a href="#location">Location</a>
+            <span class="separator">•</span>
+            <a href="#stats">Stats</a>
+            <span class="separator">•</span>
+            <a href="#reviews">Reviews</a>
+            <span class="separator">•</span>
+            <a href="#hours">Hours</a>
+        </nav>
+
+        <section id="overview" class="spa-description">
+            <h3>Brief Overvieww</h3>
+            <p>Established in Lake Oswego, OR, Lake Oswego Vein and Aesthetic _ LOVA is a medical facility focusing on medical spa, cosmetic surgeon, laser hair removal service, vascular surgeon, skin care clinic, tattoo removal service. The spa has accumulated 81 client reviews and maintains a 5.0-star rating. The facility provides medical spa treatments in a clinical setting.</p>
+        </section>
+
+        <section id="services">
+            <h3>Services</h3>
+            <p>Medical spa, Cosmetic surgeon, Laser hair removal service, Vascular surgeon, Skin care clinic, Tattoo removal service</p>
+        </section>
+
+        <section id="location" class="map-section">
+            <h3>Location</h3>
+            <div class="map-container">
+                <iframe
+                    width="100%"
+                    height="450"
+                    style="border:0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDUVkkidbALYcaWBwzomcsfjSpldUAJxMs&q=16877%20SW%2065th%20Ave%2C%20Lake%20Oswego%2C%20OR%2097035">
+                </iframe>
+            </div>
+        </section>
+
+        <div id="stats" class="stats">
+            <div class="stat-card">
+                <h3>Rating</h3>
+                <p><i class="fas fa-star"></i> 5.0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Reviews</h3>
+                <p><i class="fas fa-comments"></i> 81</p>
+            </div>
+            <div class="stat-card">
+                <h3>Status</h3>
+                <p><i class="fas fa-check-circle"></i> OPERATIONAL</p>
+            </div>
+        </div>
+
+        <section id="reviews">
+            
+        <div class="review-chart-container">
+            <div class="chart-section">
+                <canvas id="review-chart"></canvas>
+            </div>
+        </div>
+        <script>
+            const ctx = document.getElementById('review-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['5 Stars', '4 Stars', '3 Stars', '2 Stars', '1 Star'],
+                    datasets: [{
+                        data: [
+                            81,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        backgroundColor: [
+                            '#22c55e',
+                            '#84cc16',
+                            '#eab308',
+                            '#f97316',
+                            '#ef4444'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                generateLabels: function(chart) {
+                                    const data = chart.data;
+                                    return data.labels.map((label, i) => ({
+                                        text: label + ' (' + data.datasets[0].data[i] + ' reviews)',
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        index: i
+                                    }));
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.raw + ' reviews';
+                                }
+                            }
+                        }
+                    },
+                    elements: {
+                        arc: {
+                            borderWidth: 0
+                        }
+                    }
+                }
+            });
+        </script>
+    
+        </section>
+
+        <img class="spa-photo" src="https://lh5.googleusercontent.com/p/AF1QipNT7xxStlo-KEz8hH0sdkugxdw-A3wIodFZPolc=w800-h500-k-no" alt="Lake Oswego Vein and Aesthetic _ LOVA">
+
+        <section id="hours">
+            <h3>Hours of Operation</h3>
+            <table class="hours-table">
+                
+            <tr>
+                <td>Monday</td>
+                <td>8:30AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td>8:30AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td>Closed</td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td>8:30AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td>8:30AM-5PM</td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td>Closed</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>Closed</td>
+            </tr>
+            </table>
+        </section>
+
+        <div class="contact-actions">
+            <a href="tel:+1 503-387-5546" class="button">Call Now</a>
+            <a href="https://lakeoswegoveinandaesthetic.com/" target="_blank" class="button">Visit Website</a>
+            <a href="https://www.google.com/maps/place/Lake+Oswego+Vein+and+Aesthetic+_+LOVA/@45.3979456,-122.74489539999999,14z/data=!4m8!1m2!2m1!1sLake+Oswego+Vein+and+Aesthetic+_+LOVA!3m4!1s0x549572e6b0ed738f:0x9918bf28aa6ae0ef!8m2!3d45.3979456!4d-122.74489539999999" target="_blank" class="button">Get Directions</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Oregon Med Spas Directory. All rights reserved.</p>
+    </footer>
+</body>
+</html> 

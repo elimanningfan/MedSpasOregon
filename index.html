@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Top Medical Spas in Oregon - Find the best med spas for treatments and services">
+    <title>Top Oregon Med Spas</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Load data and app code before Google Maps API -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Top Medical Spas in Oregon</h1>
+        <p>Discover the finest medical spas offering premium aesthetic treatments</p>
+        <div class="filters">
+            <div class="filter-header">
+                <h2>Filter & Sort</h2>
+                <button id="clear-filters" class="clear-btn">Clear All Filters</button>
+            </div>
+            
+            <div class="search-box">
+                <label for="search">🔍</label>
+                <input type="text" id="search" placeholder="Search by name, location, or services...">
+            </div>
+            
+            <div class="sort-options">
+                <label for="sort">Sort by:</label>
+                <select id="sort">
+                    <option value="rating">Rating (High to Low)</option>
+                    <option value="reviews">Most Reviews</option>
+                    <option value="name">Name (A-Z)</option>
+                    <option value="location">Location</option>
+                </select>
+            </div>
+            
+            <div class="city-filter">
+                <label>Filter by City:</label>
+                <div class="city-tags" id="city-tags"></div>
+            </div>
+
+            <div class="service-filter">
+                <label>Popular Services:</label>
+                <div class="service-tags" id="service-tags">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            
+            <div class="results-count">
+                Showing <span id="filtered-count">0</span> of <span id="total-count">0</span> med spas
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="map-overview">
+            <div id="map"></div>
+        </section>
+
+        <section class="med-spa-grid">
+            <!-- Template card -->
+            <article class="med-spa-card template">
+                <h2><a class="spa-name"></a></h2>
+                <div class="rating">
+                    <i class="fas fa-star"></i> <span></span>
+                    <span class="review-count">(<span></span> reviews)</span>
+                </div>
+                <p class="location"><i class="fas fa-location-dot"></i> <span></span></p>
+                <p class="services">Services: <span></span></p>
+                <p class="contact">
+                    <i class="fas fa-phone"></i> <a class="phone" href=""></a>
+                </p>
+                <a class="button">Learn More</a>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Oregon Med Spas Directory. All rights reserved.</p>
+    </footer>
+
+    <!-- Load Google Maps API last -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUVkkidbALYcaWBwzomcsfjSpldUAJxMs&callback=initMap&loading=async&v=weekly">
+    </script>
+</body>
+</html> 
